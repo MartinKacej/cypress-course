@@ -1,0 +1,23 @@
+{
+  "name": "cypress_udemy",
+  "version": "1.0.0",
+  "description": "cypress testing project for Udemy course",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "keywords": [
+    "testing",
+    "cypress",
+    "automation"
+  ],
+  "author": "Martin Kacej",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.14.2",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  }
+  
+}
