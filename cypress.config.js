@@ -8,7 +8,7 @@ module.exports = defineConfig({
       require('cypress-mochawesome-reporter/plugin')(on);
       on('file:preprocessor', cucumber())
     },
-      specPattern: "cypress/e2e/cucumber-tests/*.feature",
+      //specPattern: "cypress/e2e/cucumber-tests/*.feature",
       stepDefinitions: "cypress/integration",
       testIsolation: true,
       video:false,
