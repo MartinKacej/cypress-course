@@ -54,6 +54,18 @@ describe('Try to sign with invalid credentials', () => {
         )
     })
 
+    it('Remember me cookie', () => {
+        loginPage.rememberCheck().check()
+        loginPage.signIn("invalid","invalid")
+        cy.wait(200)
+        cy.getCookie("connect.sid").should("not.exist")
+        cy.wait(200)
+        loginPage.rememberCheck().check()
+        loginPage.signIn("Allie2","s3cret")
+        cy.wait(200)
+        cy.getCookie("connect.sid").should("have.property", "expiry")
+    })
+
     it('Check registration link', ()=> {
         loginPage.regLink().click()
         cy.url().should('equal','http://localhost:3000/signup')

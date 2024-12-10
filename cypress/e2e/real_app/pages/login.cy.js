@@ -10,7 +10,7 @@ export default class LoginPage {
         return cy.get('#password')
     }
     rememberCheck(){
-        return cy.get('.PrivateSwitchBase-input-14')
+        return cy.get('[data-test="signin-remember-me"]').get('[type="checkbox"]')
     }
     submitButton(){
         return cy.get('.MuiButton-label').contains('Sign In').parent()
