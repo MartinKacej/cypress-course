@@ -26,12 +26,24 @@ export default class signUpPage {
         this.usernameField().type(username)
         this.passwordField().type(pass)
         this.passwordConfField().type(pass)
-        this.signUpButton().click({force:true})
+        this.signUpButton().click()
     }
     signInLink(){
         return cy.get('.MuiGrid-root > a')
     }
     isSumbitDisabled(){
         this.signUpButton().should('be.disabled')
+    }
+    helpTextFirstName(){
+        return cy.get('#firstName-helper-text')
+    }
+    helpTextLastName(){
+        return cy.get('#lastName-helper-text')
+    }
+    helpTextPassword(){
+        return cy.get('#password-helper-text')
+    }
+    helpTextConfPassword(){
+        return cy.get('#confirmPassword-helper-text')
     }
 }
