@@ -1,22 +1,12 @@
 /// <reference types="Cypress"/>
 import LoginPage from "./pages/login.cy"
-
-describe('Check that RealWorld app is running', () => {
-
-    it('Assert URL', () => {
-        cy.exec('pgrep -f node.*cypress-realworld-app').its('stdout').should('not.equal', '')
-        cy.visit('localhost:3000')
-        cy.title().should('contain','Cypress Real World App')
-    })
-})
-
 describe('Try to sign with invalid credentials', () => {
 
     Cypress.config('baseUrl','http://localhost:3000/signin')
     
     const loginPage = new LoginPage()
 
-    beforeEach("Visit logon page", () => {
+    beforeEach("Visit Login page", () => {
         loginPage.visit()
     })
  

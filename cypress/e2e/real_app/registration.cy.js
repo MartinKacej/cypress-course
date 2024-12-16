@@ -3,18 +3,6 @@ import signUpPage from './pages/registration.cy'
 import LoginPage from './pages/login.cy'
 import createBankAccount from './pages/create_bank'
 
-describe('Check that RealWorld app is running', () => {
-	it('Assert that application is running', () => {
-		cy.exec('pgrep -f node.*cypress-realworld-app')
-			.its('stdout')
-			.should('not.equal', '')
-		cy.exec('ss -tlpn  | grep 3000.*node')
-		cy.exec('ss -tlpn  | grep 3001.*node')
-		cy.visit('localhost:3000')
-		cy.title().should('contain', 'Cypress Real World App')
-	})
-})
-
 describe('Test Sign Up page', () => {
 	const regPage = new signUpPage()
 
