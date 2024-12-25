@@ -52,7 +52,7 @@ describe('Try to sign with invalid credentials', () => {
         cy.wait(200)
         loginPage.rememberCheck().check()
         loginPage.signIn("Allie2","s3cret")
-        cy.wait(200)
+        cy.contains('New') // wait for page to load, cookie is stored after that
         cy.getCookie("connect.sid").should("have.property", "expiry")
     })
 

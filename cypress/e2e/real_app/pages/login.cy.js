@@ -13,10 +13,10 @@ export default class LoginPage {
         return cy.get('[data-test="signin-remember-me"]').get('[type="checkbox"]')
     }
     submitButton(){
-        return cy.get('.MuiButton-label').contains('Sign In').parent()
+        return cy.get('[data-test="signin-submit"]').contains('Sign In')
     }
     submit(){
-        cy.get('.MuiButton-label').contains('Sign In').parent().click({force:true})
+        cy.get('[data-test="signin-submit"]').contains('Sign In').click()
     }
     userWarning(){
         return cy.get('#username-helper-text')

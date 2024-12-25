@@ -4,34 +4,34 @@ export default class NavBar {
         cy.get('[data-test="sidenav"]').should('be.visible')
         cy.get('[data-test="sidenav-toggle"]').click()
     }
-    getNavButton(){
+    navButton(){
         return cy.get('[data-test="sidenav-toggle"]')
     }
-    getBalance(){
+    balance(){
        return cy.get('[data-test="sidenav-user-balance"]')
     }
-    getName(){
+    name(){
         return cy.get('[data-test="sidenav-user-full-name"]')
     }
-    getUsername(){
+    username(){
         return cy.get('[data-test="sidenav-username"]')
     }
-    getHomeButton(){
+    hmeButton(){
         return cy.get('[data-test="sidenav-home"]')
     }
-    getMyAccButton(){
+    myAccButton(){
         return cy.get('[data-test="sidenav-user-settings"]')
     }
-    getBankAccs(){
+    bankAccs(){
         return cy.get('[data-test="sidenav-bankaccounts"]')
     }
     logout(){
         cy.get('[data-test="sidenav-signout"]').click()
     }
-    getNotifications(){
+    notifications(){
         return cy.get('[data-test="nav-top-notifications-link"]')
     }
-    getNotificationsAmount(){
+    notificationsAmount(){
         return cy.get('[data-test="nav-top-notifications-count"]').find('span') 
     }
     newTransaction(){
