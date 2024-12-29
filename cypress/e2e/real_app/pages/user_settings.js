@@ -15,7 +15,7 @@ export default class UserSettings {
 	surnameWarning() {
 		return cy.get('#user-settings-lastName-input-helper-text')
 	}
-	getEmail() {
+	email() {
 		return cy.get('[data-test="user-settings-email-input"]')
 	}
 	emailWarning() {
