@@ -22,4 +22,14 @@
 //
 //
 // -- This will overwrite an existing command --
+
+//const {method} = require("cypress/types/bluebird")
+
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('db_reset', () => {
+    cy.request('POST',"http://localhost:3001/testdata/seed").its('status').should('eq',200)
+})
+
+Cypress.Commands.add("loginByAPI",(user, pass)=>{
+    cy.request(  "POST", "http://localhost:3001/login",{ "username":user, "password":pass}).its('status').should('eq',200)
+})
