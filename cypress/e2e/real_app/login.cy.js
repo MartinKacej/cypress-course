@@ -14,24 +14,28 @@ describe('Try to sign with invalid credentials', () => {
         cy.wait(500)
         loginPage.userField().clear()
         loginPage.passField().clear()
-        loginPage.submit()
+        loginPage.submitButton().should('be.disabled')
         loginPage.userWarning().should('be.visible')
         
     })
     
     it('Empty password', () => {
         loginPage.userField().type('test')
+        loginPage.passField().clear()
         loginPage.userWarning().should('not.exist')
         loginPage.submitButton().should('be.disabled')
     })
     
     it('Short password', () => {
-        loginPage.signIn("test","t")
+        loginPage.userField().type('test')
+        loginPage.passField().type("t")
+        loginPage.passField().blur()
         loginPage.submitButton().should('be.disabled')
         loginPage.passWarning().should('exist') 
     })
     
     it('Non existent user', () => {
+        cy.db_reset()
         cy.intercept('POST','/login').as('req')
         loginPage.signIn("test","test")
         loginPage.passWarning().should('not.exist') 
@@ -45,13 +49,14 @@ describe('Try to sign with invalid credentials', () => {
     })
 
     it('Remember me cookie', () => {
+        cy.db_reset()
         loginPage.rememberCheck().check()
         loginPage.signIn("invalid","invalid")
         cy.wait(200)
         cy.getCookie("connect.sid").should("not.exist")
         cy.wait(200)
         loginPage.rememberCheck().check()
-        loginPage.signIn("Allie2","s3cret")
+        loginPage.signIn("Dina20","s3cret")
         cy.contains('New') // wait for page to load, cookie is stored after that
         cy.getCookie("connect.sid").should("have.property", "expiry")
     })

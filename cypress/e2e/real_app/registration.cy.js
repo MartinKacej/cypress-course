@@ -6,7 +6,10 @@ import createBankAccount from './pages/create_bank'
 describe('Test Sign Up page', () => {
 	const regPage = new signUpPage()
 
-	beforeEach('Go to sign up page', () => regPage.visit())
+	beforeEach('Go to sign up page', () => { 
+        cy.db_reset()
+        regPage.visit()
+    })
 
 	it('Check first name field', () => {
 		regPage.firstNameField().clear()
