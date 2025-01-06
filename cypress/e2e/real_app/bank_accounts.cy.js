@@ -67,23 +67,25 @@ describe('Check create bank page', () => {
 			expect(req.request.body.variables.accountNumber).eq('123-456-78')
 			expect(req.response.statusCode).eq(200)
 		})
-        settings.accountsList().find('li').should('have.length',2)
+		settings.accountsList().find('li').should('have.length', 2)
 	})
 	it('Delete bank account', () => {
+		let del_req_found = false
 		bankPage.createBankAccount('TEST5', '123456789', '123-456-78')
-        //TODO get right request
-		cy.intercept({method: 'POST',
-                     path:'/graphql'}).as('req')
-                   //query:{  operationName:"DeleteBankAccount"
 
-        settings.deleteAccount('TEST5')
-        settings.accountsList().children().contains("TEST5 (Deleted)")
-        settings.accountsList().children().first().find('p').invoke('text').then((text) =>{
-            settings.deleteAccount(text)
-        })
-		cy.wait('@req').then((req) => {
-			cy.log(req)
-			expect(req.response.statusCode).eq(200)
-		})
+		cy.intercept({ method: 'POST', path: '/graphql' }).as('req')
+		settings.deleteAccount('TEST5')
+		settings.accountsList().children().contains('TEST5 (Deleted)')
+		// Multiple requests with same URL are made, wait 3 times for right one
+		cy.wrap([1, 2, 3]).each(() => {
+	    	cy.wait('@req').then((req) => {
+	    		cy.log(req)
+	    		if (req.request.body.operationName == 'DeleteBankAccount') {
+	    			del_req_found = true
+	    			expect(req.response.statusCode).eq(200)
+	    		}
+	    		cy.log(del_req_found)
+	    	})
+		}).then(() => expect(del_req_found, 'Delete request found').eq(true))
 	})
 })
